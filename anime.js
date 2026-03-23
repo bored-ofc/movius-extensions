@@ -1,34 +1,34 @@
 extensionManager.register({
-  name: "Anime Demo",
+  name: "Anime API",
 
   async getMovies() {
-    return [
-      {
-        id: 1,
-        title: "Demon Slayer",
-        image: "https://picsum.photos/300/400?1"
-      },
-      {
-        id: 2,
-        title: "Jujutsu Kaisen",
-        image: "https://picsum.photos/300/400?2"
-      },
-      {
-        id: 3,
-        title: "Attack on Titan",
-        image: "https://picsum.photos/300/400?3"
-      }
-    ];
+    try {
+      let res = await fetch("https://api.jikan.moe/v4/anime");
+      let json = await res.json();
+
+      return json.data.slice(0,20).map(a => ({
+        id: a.mal_id,
+        title: a.title,
+        image: a.images.jpg.image_url
+      }));
+    } catch {
+      return [];
+    }
   },
 
   async getManga() {
-    return [
-      {
-        id: 4,
-        title: "One Piece",
-        image: "https://picsum.photos/300/400?4"
-      }
-    ];
+    try {
+      let res = await fetch("https://api.jikan.moe/v4/manga");
+      let json = await res.json();
+
+      return json.data.slice(0,20).map(a => ({
+        id: a.mal_id,
+        title: a.title,
+        image: a.images.jpg.image_url
+      }));
+    } catch {
+      return [];
+    }
   },
 
   async getStreamUrl(id) {
