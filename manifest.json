@@ -1,0 +1,8 @@
+{
+  "extensions": [
+    {
+      "name": "Anime Demo",
+      "url": "https://raw.githubusercontent.com/bored-ofc/movius-extensions/main/anime.js"
+    }
+  ]
+}
