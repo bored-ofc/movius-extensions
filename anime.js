@@ -6,13 +6,25 @@ extensionManager.register({
       let res = await fetch("https://api.jikan.moe/v4/anime");
       let json = await res.json();
 
-      return json.data.slice(0,20).map(a => ({
+      return json.data.slice(0, 20).map(a => ({
         id: a.mal_id,
         title: a.title,
         image: a.images.jpg.image_url
       }));
     } catch {
-      return [];
+      // 🔥 FALLBACK (SI FALLA INTERNET)
+      return [
+        {
+          id: 1,
+          title: "Demon Slayer",
+          image: "https://picsum.photos/300/400?1"
+        },
+        {
+          id: 2,
+          title: "Jujutsu Kaisen",
+          image: "https://picsum.photos/300/400?2"
+        }
+      ];
     }
   },
 
@@ -21,13 +33,19 @@ extensionManager.register({
       let res = await fetch("https://api.jikan.moe/v4/manga");
       let json = await res.json();
 
-      return json.data.slice(0,20).map(a => ({
+      return json.data.slice(0, 20).map(a => ({
         id: a.mal_id,
         title: a.title,
         image: a.images.jpg.image_url
       }));
     } catch {
-      return [];
+      return [
+        {
+          id: 3,
+          title: "One Piece",
+          image: "https://picsum.photos/300/400?3"
+        }
+      ];
     }
   },
 
